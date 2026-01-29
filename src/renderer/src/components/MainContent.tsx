@@ -7,23 +7,29 @@ import { SettingsView } from './views/SettingsView'
 
 interface MainContentProps {
   currentView: AppView
+  onViewChange: (view: AppView, screenshot?: string) => void
+  screenshotData?: string
 }
 
-export function MainContent({ currentView }: MainContentProps): JSX.Element {
+export function MainContent({ currentView, onViewChange, screenshotData }: MainContentProps): JSX.Element {
+  const handleNavigate = (view: 'annotate', screenshot?: string) => {
+    onViewChange(view, screenshot)
+  }
+
   const renderView = () => {
     switch (currentView) {
       case 'record':
-        return <RecordView />
+        return <RecordView onNavigate={handleNavigate} />
       case 'screenshot':
         return <ScreenshotView />
       case 'annotate':
-        return <AnnotateView />
+        return <AnnotateView screenshotData={screenshotData} />
       case 'gallery':
         return <GalleryView />
       case 'settings':
         return <SettingsView />
       default:
-        return <RecordView />
+        return <RecordView onNavigate={handleNavigate} />
     }
   }
 

@@ -1,4 +1,4 @@
-import { ipcMain, desktopCapturer, BrowserWindow } from 'electron'
+import { ipcMain, desktopCapturer } from 'electron'
 import { IPC_CHANNELS } from '../../shared/constants/channels'
 import type { CaptureSource } from '../../shared/types/capture.types'
 
@@ -33,8 +33,7 @@ export function registerCaptureHandlers(): void {
         thumbnailSize: { width: 320, height: 180 }
       })
 
-      // Get the currently focused window (usually the first non-ScreenTool window)
-      const focusedWindow = BrowserWindow.getFocusedWindow()
+      // Get the first non-ScreenTool window
       const focusedSource = sources.find((s) => {
         // Exclude our own window
         return !s.name.includes('ScreenTool')

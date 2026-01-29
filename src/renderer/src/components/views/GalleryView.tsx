@@ -69,7 +69,7 @@ export function GalleryView(): JSX.Element {
   return (
     <div className="flex flex-col gap-6 h-full">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-foreground">Gallery</h1>
+        <h1 className="text-2xl font-bold text-foreground">Recordings</h1>
         <div className="flex gap-2">
           <button
             onClick={loadCaptures}

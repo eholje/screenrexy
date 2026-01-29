@@ -1,6 +1,6 @@
 import { ipcMain, dialog, shell, clipboard, nativeImage, app } from 'electron'
 import { writeFile, mkdir, readdir, stat } from 'fs/promises'
-import { join, basename } from 'path'
+import { join } from 'path'
 import { IPC_CHANNELS } from '../../shared/constants/channels'
 
 export function registerFileHandlers(): void {

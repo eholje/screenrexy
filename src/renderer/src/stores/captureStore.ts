@@ -44,8 +44,8 @@ interface CaptureStore {
 const defaultSettings: CaptureSettings = {
   quality: 'high',
   fps: 30,
-  includeAudio: true,
-  includeMicrophone: true,
+  includeAudio: true,      // System audio ON by default (for Teams/meetings)
+  includeMicrophone: true, // Microphone ON by default
   showCursor: true,
   outputFormat: 'mp4',
   outputPath: ''

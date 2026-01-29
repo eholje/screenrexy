@@ -9,8 +9,9 @@ export type AppView = 'record' | 'screenshot' | 'annotate' | 'gallery' | 'settin
 
 function App(): JSX.Element {
   const [currentView, setCurrentView] = useState<AppView>('record')
-  const [isDarkMode, setIsDarkMode] = useState(true)
+  const [isDarkMode] = useState(true)
   const [notification, setNotification] = useState<string | null>(null)
+  const [screenshotData, setScreenshotData] = useState<string | undefined>(undefined)
   const notificationTimeoutRef = useRef<number | null>(null)
 
   const { recordingState } = useCaptureStore()
@@ -97,12 +98,23 @@ function App(): JSX.Element {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
+  const handleViewChange = useCallback((view: AppView, screenshot?: string) => {
+    if (view === 'annotate' && screenshot) {
+      setScreenshotData(screenshot)
+    }
+    setCurrentView(view)
+  }, [])
+
   return (
     <div className="flex flex-col h-screen bg-background">
       <TitleBar />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar currentView={currentView} onViewChange={setCurrentView} />
-        <MainContent currentView={currentView} />
+        <MainContent
+          currentView={currentView}
+          onViewChange={handleViewChange}
+          screenshotData={screenshotData}
+        />
       </div>
 
       {/* Notification toast */}

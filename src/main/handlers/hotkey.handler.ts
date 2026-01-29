@@ -1,5 +1,4 @@
 import { ipcMain } from 'electron'
-import { IPC_CHANNELS } from '../../shared/constants/channels'
 import { getHotkeyService, type HotkeyBinding } from '../services/HotkeyService'
 
 export function registerHotkeyHandlers(): void {
